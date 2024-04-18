@@ -1,8 +1,8 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 
-interface UserDocument extends Document {
+export interface UserDocument extends Document {
   _id: string;
   username: string;
   email: string;

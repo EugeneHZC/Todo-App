@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/UserModel";
 
-function createToken(userId: string) {
-  return jwt.sign({ _id: userId }, process.env.SECRET!, { expiresIn: "3d" });
+function createToken(_id: string) {
+  return jwt.sign({ _id }, process.env.SECRET!, { expiresIn: "3d" });
 }
 
 async function signUpUser(req: Request, res: Response) {
