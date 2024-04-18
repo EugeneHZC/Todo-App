@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import User from "../models/UserModel";
 
 function createToken(userId: string) {
   return jwt.sign({ _id: userId }, process.env.SECRET!, { expiresIn: "3d" });
@@ -9,7 +10,11 @@ async function signUpUser(req: Request, res: Response) {
   const { username, email, password } = req.body;
 
   try {
-    // const user = await User.signUp(username, email, password)
+    const user = await User.signUp(username, email, password);
+
+    const token = createToken(user._id);
+
+    res.json({ username, email, token });
   } catch (error) {
     res.json({ message: "Failed to sign up user.", content: error });
   }
@@ -17,4 +22,16 @@ async function signUpUser(req: Request, res: Response) {
 
 async function loginUser(req: Request, res: Response) {
   const { username, email, password } = req.body;
+
+  try {
+    const user = await User.login(username, email, password);
+
+    const token = createToken(user._id);
+
+    res.json({ username, email, token });
+  } catch (error) {
+    res.json({ message: "Failed to login user.", content: error });
+  }
 }
+
+export { signUpUser, loginUser };
