@@ -1,5 +1,11 @@
+import SignUpPage from "./pages/SignUpPage";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <SignUpPage />
+    </>
+  );
 }
 
 export default App;
