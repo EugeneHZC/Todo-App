@@ -7,3 +7,10 @@ export type User = {
   email: String;
   password: String;
 };
+
+export type Todo = {
+  _id: String;
+  description: String;
+  userId: String;
+  timestamp: String;
+};
