@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, createContext, useState } from "react";
+import { Dispatch, ReactNode, createContext, useEffect, useState } from "react";
 import { User } from "../config";
 
 interface AuthState {
@@ -31,6 +31,16 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         break;
     }
   };
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+
+    if (userData) {
+      const user = JSON.parse(userData);
+
+      dispatch({ type: "LOGIN", payload: user });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, dispatch }}>
