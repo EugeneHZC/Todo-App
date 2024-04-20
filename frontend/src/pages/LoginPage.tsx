@@ -1,43 +1,35 @@
 import { useState } from "react";
-import { useSignUp } from "../hooks/useSignUp";
+import { useLogin } from "../hooks/useLogin";
 
-const SignUpPage = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { signUp } = useSignUp();
+  const { login } = useLogin();
 
-  async function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (password === confirmPassword) {
-      const { response, json } = await signUp(username, email, password);
+    const { response, json } = await login(username, email, password);
 
-      if (response.ok) {
-        alert("User signed up successfully!");
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-      } else {
-        alert(json.content);
-      }
-    } else {
-      alert("Password and confirm password must be the same");
+    if (response.ok) {
+      alert("User login successfull!");
+      setUsername("");
+      setEmail("");
       setPassword("");
-      setConfirmPassword("");
+    } else {
+      alert(json.content);
     }
   }
 
   return (
     <div className="d-flex justify-content-center mt-5">
       <form
-        onSubmit={handleSignUp}
+        onSubmit={handleLogin}
         className="border border-1 p-5 border-secondary bg-light w-25 rounded-3 d-flex gap-3 flex-column"
       >
-        <h3>Sign Up</h3>
+        <h3>Login</h3>
 
         <div>
           <label htmlFor="username">Username</label>
@@ -75,24 +67,12 @@ const SignUpPage = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="confirm-password">Confirm password</label>
-          <input
-            type="password"
-            name="confirm-password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="form-control"
-          />
-        </div>
-
         <button type="submit" className="btn btn-primary">
-          Sign Up
+          Login
         </button>
       </form>
     </div>
   );
 };
 
-export default SignUpPage;
+export default LoginPage;

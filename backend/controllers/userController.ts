@@ -16,7 +16,10 @@ async function signUpUser(req: Request, res: Response) {
 
     res.json({ username, email, token });
   } catch (error) {
-    res.json({ message: "Failed to sign up user.", content: error });
+    res.status(400).json({
+      message: "Failed to sign up user.",
+      content: (error as Error).message,
+    });
   }
 }
 
@@ -30,7 +33,10 @@ async function loginUser(req: Request, res: Response) {
 
     res.json({ username, email, token });
   } catch (error) {
-    res.json({ message: "Failed to login user.", content: error });
+    res.status(400).json({
+      message: "Failed to login user.",
+      content: (error as Error).message,
+    });
   }
 }
 

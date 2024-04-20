@@ -1,10 +1,10 @@
 import { USER_API } from "../config";
 import { useAuthContext } from "./useAuthContext";
 
-export function useSignUp() {
+export function useLogin() {
   const { dispatch } = useAuthContext();
 
-  async function signUp(username: string, email: string, password: string) {
+  async function login(username: string, email: string, password: string) {
     const body = { username, email, password };
 
     const options = {
@@ -15,7 +15,7 @@ export function useSignUp() {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(`${USER_API}/sign-up`, options);
+    const response = await fetch(`${USER_API}/login`, options);
 
     const json = await response.json();
 
@@ -28,5 +28,5 @@ export function useSignUp() {
     return { response, json };
   }
 
-  return { signUp };
+  return { login };
 }
