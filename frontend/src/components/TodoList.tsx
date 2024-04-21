@@ -1,6 +1,6 @@
 import { TODO_API, Todo } from "../config";
 import { formatDistanceToNow } from "date-fns";
-import TodoModal from "./TodoModal";
+import EditTodoModal from "./EditTodoModal";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useTodoContext } from "../hooks/useTodoContext";
 
@@ -46,7 +46,7 @@ const TodoList = ({ todos }: { todos: Todo[] }) => {
               <td>{todo.description}</td>
               <td>{formatDistanceToNow(new Date(todo.createdAt))} ago</td>
               <td>
-                <TodoModal todo={todo} />
+                <EditTodoModal todo={todo} />
               </td>
               <td>
                 <button

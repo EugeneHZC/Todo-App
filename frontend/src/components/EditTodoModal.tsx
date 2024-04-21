@@ -3,7 +3,7 @@ import { TODO_API, Todo } from "../config";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useTodoContext } from "../hooks/useTodoContext";
 
-const TodoModal = ({ todo }: { todo: Todo }) => {
+const EditTodoModal = ({ todo }: { todo: Todo }) => {
   const [description, setDescription] = useState(String(todo.description));
   const { user } = useAuthContext();
   const { dispatch } = useTodoContext();
@@ -35,7 +35,6 @@ const TodoModal = ({ todo }: { todo: Todo }) => {
 
     if (response.ok) {
       dispatch({ type: "UPDATE_TODO", payload: json });
-      alert("Todo updated sucessfully!");
     } else {
       alert(json.message);
     }
@@ -95,4 +94,4 @@ const TodoModal = ({ todo }: { todo: Todo }) => {
   );
 };
 
-export default TodoModal;
+export default EditTodoModal;

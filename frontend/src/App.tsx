@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
+import CreateTodoPage from "./pages/CreateTodoPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -17,6 +18,10 @@ function App() {
           <Route
             path="/"
             element={user ? <HomePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/create-todo"
+            element={user ? <CreateTodoPage /> : <Navigate to="/login" />}
           />
           <Route
             path="/sign-up"
