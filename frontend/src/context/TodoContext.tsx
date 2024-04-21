@@ -20,7 +20,16 @@ interface DeleteTodoAction {
   payload: Todo;
 }
 
-type Action = SetTodosAction | CreateTodoAction | DeleteTodoAction;
+interface UpdateTodoAction {
+  type: "UPDATE_TODO";
+  payload: Todo;
+}
+
+type Action =
+  | SetTodosAction
+  | CreateTodoAction
+  | DeleteTodoAction
+  | UpdateTodoAction;
 
 interface TodoContextState extends TodoState {
   dispatch: Dispatch<Action>;
@@ -42,6 +51,15 @@ const TodoContextProvider = ({ children }: { children: ReactNode }) => {
       case "DELETE_TODO":
         setTodos(
           todos?.filter((todo) => todo._id !== action.payload._id) ?? null
+        );
+        break;
+      case "UPDATE_TODO":
+        setTodos((prevTodos) =>
+          prevTodos
+            ? prevTodos.map((todo) =>
+                todo._id === action.payload._id ? action.payload : todo
+              )
+            : null
         );
         break;
       default:
